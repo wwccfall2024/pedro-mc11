@@ -94,14 +94,27 @@ CREATE TABLE equipped (
 );
 
 CREATE OR REPLACE VIEW character_items AS
-  SELECT character.character_id,
-         character.name AS character_name,
+  SELECT characters.character_id,
+         characters.name AS character_name,
          items.name AS item_name,
          items.armor,
          items.damage
   FROM characters 
-  INNER JOIN inventory ON character.character_id = inventory.character_id
+  INNER JOIN inventory ON characters.character_id = inventory.character_id
   INNER JOIN items ON inventory.item_id = items.item_id;
 
+CREATE OR REPLACE VIEW team_items AS
+  SELECT teams.team_id,
+         teams.name AS team_name,
+         items.name AS item_name,
+         items.armor,
+         items.damage
+  FROM teams 
+  INNER JOIN team_members ON teams.team_id = team_members.team_id
+  INNER JOIN inventory ON team_members.character_id = inventory.character_id
+  INNER JOIN items ON inventory.item_id = items.item_id;
+
+
 SELECT * FROM character_items
+SELECT * FROM team_items
 
