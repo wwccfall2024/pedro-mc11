@@ -69,12 +69,26 @@ CREATE TABLE inventory (
   inventory_id INT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
   character_id INT UNSIGNED NOT NULL,
   item_id INT UNSIGNED NOT NULL,
+  FOREIGN KEY (character_id)
+    REFERENCES characters (character_id)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE,
   FOREIGN KEY (item_id)
     REFERENCES items (item_id)
     ON UPDATE CASCADE
-    ON DELETE CASCADE,
+    ON DELETE CASCADE
+);
+
+CREATE TABLE equipped (
+  equipped_id INT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  character_id INT UNSIGNED NOT NULL,
+  item_id INT UNSIGNED NOT NULL,
   FOREIGN KEY (character_id)
     REFERENCES characters (character_id)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE,
+  FOREIGN KEY (item_id)
+    REFERENCES items (item_id)
     ON UPDATE CASCADE
     ON DELETE CASCADE
 );
