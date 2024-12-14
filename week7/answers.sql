@@ -8,14 +8,14 @@ CREATE TABLE players (
   last_name VARCHAR(30) NOT NULL,
   email VARCHAR(50)
 )
-
+  
 CREATE TABLE characters (
   character_id INT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
   player_id INT UNSIGNED NOT NULL,
   name VARCHAR(30) NOT NULL,
   level INT UNSIGNED,
   FOREIGN KEY (player_id)
-        REFERENCES players (player_id)
-        ON UPDATE CASCADE
-        ON DELETE CASCADE
-)
+    REFERENCES players (player_id)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE
+);
