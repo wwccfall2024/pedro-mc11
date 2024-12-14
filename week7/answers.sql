@@ -118,3 +118,21 @@ CREATE OR REPLACE VIEW team_items AS
 SELECT * FROM character_items;
 SELECT * FROM team_items;
 
+DELIMITER ;;
+CREATE FUNCTION armor_total(character_id INT UNSIGNED)
+RETURNS INT UNSIGNED
+BEGIN
+  DECLARE total_armor INT UNSIGNED DEFAULT 0;
+
+  SELECT IFNULL(armor, 0) INTO total_armor
+    FROM character_stats
+    WHERE character_id = character_id;
+
+  SELECT SUM(i.armor) INTO total_armor
+    FROM equipped
+    INNER JOIN items ON equipped.item_id = items.item_id
+    WHERE equipped.character_id = character_id;
+  
+  RETURN total_armor;
+END;;
+DELIMITER ;
