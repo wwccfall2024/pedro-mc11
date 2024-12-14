@@ -92,3 +92,17 @@ CREATE TABLE equipped (
     ON UPDATE CASCADE
     ON DELETE CASCADE
 );
+
+CREATE OR REPLACE VIEW character_items 
+  SELECT characters.character_id AS character_id
+  UNION 
+  SELECT characters.name AS character_name
+  UNION 
+  SELECT items.name AS item_name
+  UNION 
+  SELECT items.armor AS armor
+  UNION 
+  SELECT items.damage AS damage
+
+SELECT * FROM character_items
+
