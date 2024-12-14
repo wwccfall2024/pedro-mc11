@@ -124,7 +124,7 @@ RETURNS INT UNSIGNED
 BEGIN
   DECLARE total_armor INT UNSIGNED DEFAULT 0;
 
-  SELECT IF NULL(armor, 0) INTO total_armor
+  SELECT IFNULL(armor, 0) INTO total_armor
     FROM character_stats
     WHERE character_id = character_id;
 
