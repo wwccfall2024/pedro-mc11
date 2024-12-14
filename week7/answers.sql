@@ -93,16 +93,15 @@ CREATE TABLE equipped (
     ON DELETE CASCADE
 );
 
-CREATE OR REPLACE VIEW character_items 
-  SELECT character_id AS character_id FROM charcters
-  UNION 
-  SELECT characters.name AS character_name FROM charcters
-  UNION 
-  SELECT items.name AS item_name FROM items
-  UNION 
-  SELECT items.armor AS armor FROM items
-  UNION 
-  SELECT items.damage AS damage FROM items
+CREATE OR REPLACE VIEW character_items AS
+  SELECT character.character_id,
+         character.name AS character_name,
+         items.name AS item_name,
+         items.armor,
+         items.damage
+  FROM characters 
+  INNER JOIN inventory ON character.character_id = inventory.character_id
+  INNER JOIN items ON inventory.item_id = items.item_id;
 
 SELECT * FROM character_items
 
