@@ -58,4 +58,23 @@ CREATE TABLE team_members (
     ON DELETE CASCADE
 );
 
+CREATE TABLE items (
+  item_id INT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  name VARCHAR(30) NOT NULL,
+  armor INT UNSIGNED,
+  damage INT UNSIGNED,
+);
 
+CREATE TABLE inventory (
+  inventory_id INT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  character_id INT UNSIGNED NOT NULL,
+  item_id INT UNSIGNED NOT NULL,
+  FOREIGN KEY (item_id)
+    REFERENCES items (item_id)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE,
+  FOREIGN KEY (character_id)
+    REFERENCES characters (character_id)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE
+);
