@@ -19,3 +19,62 @@ CREATE TABLE characters (
     ON UPDATE CASCADE
     ON DELETE CASCADE
 );
+
+CREATE TABLE winners ( 
+  character_id INT UNSIGNED PRIMARY KEY NOT NULL,
+  name VARCHAR(30) NOT NULL,
+  FOREIGN KEY (character_id)
+    REFERENCES characters (character_id)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE
+);
+
+CREATE TABLE character_stats ( 
+  character_id INT UNSIGNED PRIMARY KEY NOT NULL,
+  health INT UNSIGNED,
+  armor INT UNSIGNED,
+  FOREIGN KEY (character_id)
+    REFERENCES characters (character_id)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE
+);
+
+CREATE TABLE teams (
+  team_id INT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT, 
+  name VARCHAR(30) NOT NULL
+);
+
+CREATE TABLE team_members (
+  team_member_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+  team_id INT UNSIGNED NOT NULL,
+  character_id INT UNSIGNED NOT NULL,
+  FOREIGN KEY (team_id)
+    REFERENCES teams (team_id)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE,
+  FOREIGN KEY (character_id)
+    REFERENCES characters (character_id)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE
+);
+
+CREATE TABLE items (
+  item_id INT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  name VARCHAR(30) NOT NULL,
+  armor INT UNSIGNED,
+  damage INT UNSIGNED,
+);
+
+CREATE TABLE inventory (
+  inventory_id INT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  character_id INT UNSIGNED NOT NULL,
+  item_id INT UNSIGNED NOT NULL,
+  FOREIGN KEY (item_id)
+    REFERENCES items (item_id)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE,
+  FOREIGN KEY (character_id)
+    REFERENCES characters (character_id)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE
+);
