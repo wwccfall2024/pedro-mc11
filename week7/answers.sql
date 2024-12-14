@@ -115,6 +115,6 @@ CREATE OR REPLACE VIEW team_items AS
   INNER JOIN items ON inventory.item_id = items.item_id;
 
 
-SELECT * FROM character_items
-SELECT * FROM team_items
+SELECT * FROM character_items;
+SELECT * FROM team_items;
 
