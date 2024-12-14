@@ -94,15 +94,15 @@ CREATE TABLE equipped (
 );
 
 CREATE OR REPLACE VIEW character_items 
-  SELECT characters.character_id AS character_id
+  SELECT character_id AS character_id FROM charcters
   UNION 
-  SELECT characters.name AS character_name
+  SELECT characters.name AS character_name FROM charcters
   UNION 
-  SELECT items.name AS item_name
+  SELECT items.name AS item_name FROM items
   UNION 
-  SELECT items.armor AS armor
+  SELECT items.armor AS armor FROM items
   UNION 
-  SELECT items.damage AS damage
+  SELECT items.damage AS damage FROM items
 
 SELECT * FROM character_items
 
